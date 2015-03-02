@@ -95,7 +95,8 @@ Android与iOS主要适用于移动设备。其中Android是基于Linux的自由�
 请评价用LISP,OCcaml, GO, D，RUST等实现操作系统的利弊？
 - [x]  
 
->  
+>   利：这些语言实现的代码量更短，C相比于这些语言更加冗余。    
+ 弊：这些语言实现后的代码效率不如C。以及LISP与OCcaml作为函数式语言，在实现中对程序员要求更高。
 
 进程切换的可能实现思路？
 - [x]  http://wenku.baidu.com/link?url=r100YA-UpUOKLxd3QDEObpPOzHmt99-X7nJ5vnaNloIP5hSPp-QYjopWABlDbo54W19DhiwjPOZi3Ay37idubzftGcUguIvhIbbNpgkOh1C
