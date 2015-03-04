@@ -1,40 +1,70 @@
-个人思考题
+# lab0 SPOC思考题
+
+## 个人思考题
+
+---
 
 能否读懂ucore中的AT&T格式的X86-32汇编语言？请列出你不理解的汇编语言。
+- [x]  
 
-[x]基本能读懂。
-http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm
+>  http://www.imada.sdu.dk/Courses/DM18/Litteratur/IntelnATT.htm
+基本能读懂，但可能在实际使用过程中会遗忘一些顺序，需要反复强化。
+
 虽然学过计算机原理和x86汇编（根据THU-CS的课程设置），但对ucore中涉及的哪些硬件设计或功能细节不够了解？
+- [x]  
 
-[x]对主板的一些设计细节不了解
+>   
+对主板的细节设计不够了解
 
 哪些困难（请分优先级）会阻碍你自主完成lab实验？
+- [x]  
 
-[x]对工具不熟悉。
+>   
+对各种工具的熟悉程度不够    
+一些代码没有注释需要较多时间理解
 
 如何把一个在gdb中或执行过程中出现的物理/线性地址与你写的代码源码位置对应起来？
+- [x]  
 
-[x]使用OBJdump，生成源代码的二进制文件，能够得到对应的代码位置的线性地址编号。
+>   使用OBJdump，生成源代码的二进制文件，能够得到对应的代码位置的线性地址编号。
 
 了解函数调用栈对lab实验有何帮助？
-[x]对程序运行的流程更加了解
+- [x]  
+
+>   
+了解函数调用栈，可以帮助我们明晰汇编程序运行流程、设计思路。明白函数调用栈的变化情况，也有助于我们理解实验中的代码。
 
 你希望从lab中学到什么知识？
-[x]熟悉操作系统设计的流程
+- [x]  
 
-小组讨论题
+>   
+加深对操作系统实现细节的理解，明白其更多的设计细节。
+---
+
+## 小组讨论题
+
+---
 
 搭建好实验环境，请描述碰到的困难和解决的过程。
+- [x]  
 
-[x]
-熟悉基本的git命令行操作命令，从github上 的 http://www.github.com/chyyuu/ucore_lab 下载 ucore lab实验
+> 
+按照教程完成实验环境搭建，较为顺利。
 
-[x]
+熟悉基本的git命令行操作命令，从github上
+的 http://www.github.com/chyyuu/ucore_lab 下载
+ucore lab实验
+- [x]  
+
+> 完成实验的下载。
+
 尝试用qemu+gdb（or ECLIPSE-CDT）调试lab1
+- [x]   
 
-[x]
+> 完成qemu+gdb调试lab1
+
 对于如下的代码段，请说明”：“后面的数字是什么含义
-
+```
 /* Gate descriptors for interrupts and traps */
 struct gatedesc {
     unsigned gd_off_15_0 : 16;        // low 16 bits of offset in segment
@@ -47,9 +77,15 @@ struct gatedesc {
     unsigned gd_p : 1;                // Present
     unsigned gd_off_31_16 : 16;        // high bits of offset in segment
 };
-[x]
-对于如下的代码段，
+```
 
+- [x]  
+
+> 
+表示变量所占位数大小
+
+对于如下的代码段，
+```
 #define SETGATE(gate, istrap, sel, off, dpl) {            \
     (gate).gd_off_15_0 = (uint32_t)(off) & 0xffff;        \
     (gate).gd_ss = (sel);                                \
@@ -61,19 +97,42 @@ struct gatedesc {
     (gate).gd_p = 1;                                    \
     (gate).gd_off_31_16 = (uint32_t)(off) >> 16;        \
 }
-如果在其他代码段中有如下语句，
+```
 
+如果在其他代码段中有如下语句，
+```
 unsigned intr;
 intr=8;
 SETGATE(intr, 0,1,2,3);
+```
 请问执行上述指令后， intr的值是多少？
 
-[x]423116
-请分析 list.h内容中大致的含义，并能include这个文件，利用其结构和功能编写一个数据结构链表操作的小C程序
+- [x]  
 
-[x]
-开放思考题
+> 4231168 
+ 
+
+请分析 [list.h](https://github.com/chyyuu/ucore_lab/blob/master/labcodes/lab2/libs/list.h)内容中大致的含义，并能include这个文件，利用其结构和功能编写一个数据结构链表操作的小C程序
+- [x]  
+
+> 这个.h文件定义了一个双向链表以及相应的一些函数，与函数的相应实现（面向对象思想） 
+int main() 
+{ 
+    list_entry_t *head, *a; 
+    list_init(head); list_init(a); 
+    list_add_after(head, a); 
+    return 0;
+}
+
+---
+
+## 开放思考题
+
+---
 
 是否愿意挑战大实验（大实验内容来源于你的想法或老师列好的题目，需要与老师协商确定，需完成基本lab，但可不参加闭卷考试），如果有，可直接给老师email或课后面谈。
+- [x]  
 
-[x]
+>  暂时没有这样的想法，谢谢老师。
+
+---
