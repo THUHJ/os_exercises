@@ -116,13 +116,13 @@ SETGATE(intr, 0,1,2,3);
 - [x]  
 
 > 这个.h文件定义了一个双向链表以及相应的一些函数，与函数的相应实现（面向对象思想） 
-int main() 
-{ 
-    list_entry_t *head, *a; 
-    list_init(head); list_init(a); 
-    list_add_after(head, a); 
-    return 0;
-}
+int main()      
+{     
+    list_entry_t *head, *a;     
+    list_init(head); list_init(a);     
+    list_add_after(head, a);       
+    return 0;     
+}      
 
 ---
 
