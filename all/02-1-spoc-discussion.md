@@ -199,7 +199,6 @@ mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff
 write(1, "hello world\n", 12hello world)           = 12    
 exit_group(12)                          = ?    
 
-具体执行过程：
 首先进行虚拟内存到内存的映射，然后判断ld.so.nohwcap与ld.so.preload两个文件是否可以使用。判断之后将文件映射到内存，并设置内存映像保护。然后设置架构特定的线程状态。最终调用write的函数，向屏幕输出制定的字符串。    
 
  ```
