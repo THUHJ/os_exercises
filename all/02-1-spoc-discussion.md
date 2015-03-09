@@ -1,70 +1,223 @@
 #lec 3 SPOC Discussion
 
-## ç¬¬ä¸‰è®² å¯åŠ¨ã€ä¸­æ–­ã€å¼‚å¸¸å’Œç³»ç»Ÿè°ƒç”¨-æ€è€ƒé¢˜
+## µÚÈý½² Æô¶¯¡¢ÖÐ¶Ï¡¢Òì³£ºÍÏµÍ³µ÷ÓÃ-Ë¼¿¼Ìâ
 
 ## 3.1 BIOS
- 1. æ¯”è¾ƒUEFIå’ŒBIOSçš„åŒºåˆ«ã€‚
- 1. æè¿°PXEçš„å¤§è‡´å¯åŠ¨æµç¨‹ã€‚
+ 1. ±È½ÏUEFIºÍBIOSµÄÇø±ð¡£
+ UEFI Ö¸Í³Ò»µÄ¿ÉÀ©Õ¹¹Ì¼þ½Ó¿Ú£¬ÊÇÒ»ÖÖÏêÏ¸ÃèÊöÈ«ÐÂÀàÐÍ½Ó¿ÚµÄ±ê×¼£¬ÊÇÊÊÓÃÓÚµçÄÔµÄ±ê×¼¹Ì¼þ½Ó¿Ú¡£
+ 
+ 1. ÃèÊöPXEµÄ´óÖÂÆô¶¯Á÷³Ì¡£
+ http://baike.baidu.com/link?url=h0fiIOD0aYE_X-PbiVdS9hF5M6AV85J5kNdwFKNRIapExNlfii9Xg47tQjBNeJ41E2Qujjzy7mJNhyOc_EhaK_#2
+PXE(Pre-boot Execution Environment)ÊÇÓÉIntelÉè¼ÆµÄÐ­Òé£¬Ëü¿ÉÒÔÊ¹¼ÆËã»úÍ¨¹ýÍøÂçÆô¶¯¡£
+´óÖÂÆô¶¯Á÷³ÌÎª£º
+1.¿Í»§¶Ë¸öÈËµçÄÔ¿ª»ú
+2.Íê³ÉTCP/IP Bootrom×Ô¼ì£¬»ñµÃ¿ØÖÆÈ¨ 
+3.Bootprom ËÍ³ö BOOTP/DHCP ÒªÇóÒÔÈ¡µÃ IP¡£
+4.·þÎñÆ÷ÊÕµ½¸öÈËµçÄÔËùËÍ³öµÄÒªÇó£¬ ËÍ»Ø BOOTP/DHCP »ØÓ¦£¬ÄÚÈÝ°üÀ¨¿Í»§¶ËµÄ IP µØÖ·£¬ Ô¤ÉèÍø¹Ø£¬ ¼°¿ª»úÓ³ÏñÎÄ¼þ¡£
+5.Bootprom ÓÉ TFTP Í¨Ñ¶Ð­Òé´Ó·þÎñÆ÷ÏÂÔØ¿ª»úÓ³ÏñÎÄ¼þ¡£
+6.¸öÈËµçÄÔÍ¨¹ýÕâ¸ö¿ª»úÓ³ÏñÎÄ¼þ¿ª»ú£¬ Õâ¸ö¿ª»úÎÄ¼þ¿ÉÒÔÖ»ÊÇµ¥´¿µÄ¿ª»ú³ÌÊ½Ò²¿ÉÒÔÊÇ²Ù×÷ÏµÍ³¡£
+7.¿ª»úÓ³ÏñÎÄ¼þ½«°üº¬ kernel loader ¼°Ñ¹Ëõ¹ýµÄ kernel£¬´Ë kernel ½«Ö§³ÖNTFS rootÏµÍ³¡£
+8.Ô¶³Ì¿Í»§¶Ë¸ù¾ÝÏÂÔØµÄÎÄ¼þÆô¶¯»úÆ÷¡£
+ 
+ 
+## 3.2 ÏµÍ³Æô¶¯Á÷³Ì
+ 1. ÁË½âNTLDRµÄÆô¶¯Á÷³Ì¡£
+ NTLDRÊÇÒ»¸öÒþ²ØµÄ£¬Ö»¶ÁµÄÏµÍ³ÎÄ¼þ£¬Î»ÖÃÔÚÏµÍ³ÅÌµÄ¸ùÄ¿Â¼£¬ÓÃÀ´×°ÔØ²Ù×÷ÏµÍ³¡£
+ Ò»°ãÇé¿öÏµÍ³µÄÒýµ¼¹ý³ÌÊÇÕâÑùµÄ´úÂë
+1¡¢µçÔ´×Ô¼ì³ÌÐò¿ªÊ¼ÔËÐÐ
+2¡¢Ö÷Òýµ¼¼ÇÂ¼±»×°ÈëÄÚ´æ£¬²¢ÇÒ³ÌÐò¿ªÊ¼Ö´ÐÐ
+3¡¢»î¶¯·ÖÇøµÄÒýµ¼ÉÈÇø±»×°ÈëÄÚ´æ
+4¡¢NTLDR´ÓÒýµ¼ÉÈÇø±»×°Èë²¢³õÊ¼»¯
+5¡¢½«´¦ÀíÆ÷µÄÊµÄ£Ê½¸ÄÎª32Î»Æ½»¬ÄÚ´æÄ£Ê½
+6¡¢NTLDR¿ªÊ¼ÔËÐÐÊÊµ±µÄÐ¡ÎÄ¼þÏµÍ³Çý¶¯³ÌÐò¡£
+Ð¡ÎÄ¼þÏµÍ³Çý¶¯³ÌÐòÊÇ½¨Á¢ÔÚNTLDRÄÚ²¿µÄ£¬ËüÄÜ¶ÁFAT»òNTFS¡£
+7¡¢NTLDR¶Áboot.iniÎÄ¼þ
+8¡¢NTLDR×°ÔØËùÑ¡²Ù×÷ÏµÍ³
+Èç¹ûwindows NT/windows 2000/windows XP/windows server 2003ÕâÐ©²Ù×÷ÏµÍ³±»Ñ¡Ôñ£¬NTLDRÔËÐÐNtdetect¡£
+¶ÔÓÚÆäËûµÄ²Ù×÷ÏµÍ³£¬NTLDR×°ÔØ²¢ÔËÐÐBootsect.dosÈ»ºóÏòËü´«µÝ¿ØÖÆ¡£
+windows NT¹ý³Ì½áÊø¡£
+9.NtdetectËÑË÷¼ÆËã»úÓ²¼þ²¢½«ÁÐ±í´«ËÍ¸øNTLDR£¬ÒÔ±ã½«ÕâÐ©ÐÅÏ¢Ð´½ø\\HKE Y_LOCAL_MACHINE\HARDWAREÖÐ¡£
+10.È»ºóNTLDR×°ÔØNtoskrnl.exe£¬Hal.dllºÍÏµÍ³ÐÅÏ¢¼¯ºÏ¡£
+11.NtldrËÑË÷ÏµÍ³ÐÅÏ¢¼¯ºÏ£¬²¢×°ÔØÉè±¸Çý¶¯ÅäÖÃÒÔ±ãÉè±¸ÔÚÆô¶¯Ê±¿ªÊ¼¹¤×÷
+12.Ntldr°Ñ¿ØÖÆÈ¨½»¸øNtoskrnl.exe£¬ÕâÊ±,Æô¶¯³ÌÐò½áÊø,×°ÔØ½×¶Î¿ªÊ¼
+ 
+ 1. ÁË½âGRUBµÄÆô¶¯Á÷³Ì¡£
+ µÚÒ»½×¶Î£ºBIOSÆô¶¯Òýµ¼½×¶Î£»
+                        ÔÚ¸Ã¹ý³ÌÖÐÊµÏÖÓ²¼þµÄ³õÊ¼»¯ÒÔ¼°²éÕÒÆô¶¯½éÖÊ£»
+                        ´ÓMBRÖÐ×°ÔØÆô¶¯Òýµ¼¹ÜÀíÆ÷£¨GRUB£©²¢ÔËÐÐ¸ÃÆô¶¯Òýµ¼¹ÜÀí
+µÚ¶þ½×¶Î£ºGRUBÆô¶¯Òýµ¼½×¶Î£»
+                        ×°ÔØstage1
+                        ×°ÔØstage1.5
+                        ×°ÔØstage2
+                        ¶ÁÈ¡/boot/grub.confÎÄ¼þ²¢ÏÔÊ¾Æô¶¯²Ëµ¥£»
+                        ×°ÔØËùÑ¡µÄkernelºÍinitrdÎÄ¼þµ½ÄÚ´æÖÐ
+µÚÈý½×¶Î£ºÄÚºË½×¶Î£º
+                        ÔËÐÐÄÚºËÆô¶¯²ÎÊý£»
+                        ½âÑ¹initrdÎÄ¼þ²¢¹ÒÔØinitdÎÄ¼þÏµÍ³£¬×°ÔØ±ØÐëµÄÇý¶¯£»
+                        ¹ÒÔØ¸ùÎÄ¼þÏµÍ³
+µÚËÄ½×¶Î£ºSys V init³õÊ¼»¯½×¶Î£º
+                        Æô¶¯/sbin/init³ÌÐò£»
+                        ÔËÐÐrc.sysinit½Å±¾£¬ÉèÖÃÏµÍ³»·¾³£¬Æô¶¯swap·ÖÇø£¬¼ì²éºÍ¹ÒÔØÎÄ¼þÏµÍ³£»
+                        ¶ÁÈ¡/etc/inittabÎÄ¼þ£¬ÔËÐÐÔÚ/et/rc.d/rc<#>.dÖÐ¶¨ÒåµÄ²»Í¬ÔËÐÐ¼¶±ðµÄ·þÎñ³õÊ¼»¯½Å±¾£»
+                        ´ò¿ª×Ö·ûÖÕ¶Ë1-6ºÅ¿ØÖÆÌ¨/´ò¿ªÍ¼ÐÎÏÔÊ¾¹ÜÀíµÄ7ºÅ¿ØÖÆÌ¨
+ 
+ 
+ 
+ 1. ±È½ÏNTLDRºÍGRUBµÄ¹¦ÄÜÓÐ²îÒì¡£
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 1. ÁË½âu-bootµÄ¹¦ÄÜ¡£
+U-Boot¿ÉÖ§³ÖµÄÖ÷Òª¹¦ÄÜÁÐ±í£º
+*ÏµÍ³Òýµ¼Ö§³ÖNFS¹ÒÔØ¡¢RAMDISK(Ñ¹Ëõ»ò·ÇÑ¹Ëõ)ÐÎÊ½µÄ¸ùÎÄ¼þÏµÍ³£»Ö§³ÖNFS¹ÒÔØ¡¢´ÓFLASHÖÐÒýµ¼Ñ¹Ëõ»ò·ÇÑ¹ËõÏµÍ³ÄÚºË£»
+* »ù±¾¸¨Öú¹¦ÄÜÇ¿´óµÄ²Ù×÷ÏµÍ³½Ó¿Ú¹¦ÄÜ£»¿ÉÁé»îÉèÖÃ¡¢´«µÝ¶à¸ö¹Ø¼ü²ÎÊý¸ø²Ù×÷ÏµÍ³£¬ÊÊºÏÏµÍ³ÔÚ²»Í¬¿ª·¢½×¶ÎµÄµ÷ÊÔÒªÇóÓë²úÆ··¢²¼£¬ÓÈÒÔLinuxÖ§³Ö×îÎªÇ¿¾¢£»Ö§³ÖÄ¿±ê°å»·¾³²ÎÊý¶àÖÖ´æ´¢·½Ê½£¬ÈçFLASH¡¢NVRAM¡¢EEPROM£»
+* CRC32Ð£Ñé¿ÉÐ£ÑéFLASHÖÐÄÚºË¡¢RAMDISK¾µÏñÎÄ¼þÊÇ·ñÍêºÃ£»
+* Éè±¸Çý¶¯´®¿Ú¡¢SDRAM¡¢FLASH¡¢ÒÔÌ«Íø¡¢LCD¡¢NVRAM¡¢EEPROM¡¢¼üÅÌ¡¢USB¡¢PCMCIA¡¢PCI¡¢RTCµÈÇý¶¯Ö§³Ö£»
+* ÉÏµç×Ô¼ì¹¦ÄÜSDRAM¡¢FLASH´óÐ¡×Ô¶¯¼ì²â£»SDRAM¹ÊÕÏ¼ì²â£»CPUÐÍºÅ£»
+* ÌØÊâ¹¦ÄÜXIPÄÚºËÒýµ¼£»
 
-## 3.2 ç³»ç»Ÿå¯åŠ¨æµç¨‹
- 1. äº†è§£NTLDRçš„å¯åŠ¨æµç¨‹ã€‚
- 1. äº†è§£GRUBçš„å¯åŠ¨æµç¨‹ã€‚
- 1. æ¯”è¾ƒNTLDRå’ŒGRUBçš„åŠŸèƒ½æœ‰å·®å¼‚ã€‚
- 1. äº†è§£u-bootçš„åŠŸèƒ½ã€‚
 
-## 3.3 ä¸­æ–­ã€å¼‚å¸¸å’Œç³»ç»Ÿè°ƒç”¨æ¯”è¾ƒ
- 1. ä¸¾ä¾‹è¯´æ˜ŽLinuxä¸­æœ‰å“ªäº›ä¸­æ–­ï¼Œå“ªäº›å¼‚å¸¸ï¼Ÿ
- 1. Linuxçš„ç³»ç»Ÿè°ƒç”¨æœ‰å“ªäº›ï¼Ÿå¤§è‡´çš„åŠŸèƒ½åˆ†ç±»æœ‰å“ªäº›ï¼Ÿ  (w2l1)
+## 3.3 ÖÐ¶Ï¡¢Òì³£ºÍÏµÍ³µ÷ÓÃ±È½Ï
+ 1. ¾ÙÀýËµÃ÷LinuxÖÐÓÐÄÄÐ©ÖÐ¶Ï£¬ÄÄÐ©Òì³££¿
+ ÏµÍ³µ÷ÓÃ£¬Ó²¼þÖÐ¶Ï£¬Ê±ÖÓÖÐ¶Ï¡£
+ 
+ Òì³£ £º¹ÊÕÏ£¨Fault) Èç È±Ò³Òì³£´¦Àí³ÌÐò
+        ÏÝÚå£¨Trap) µ±Ö´ÐÐÃ»ÓÐ±ØÒªÖØÐÂÖ´ÐÐÒÑÖÕÖ¹µÄÖ¸ÁîÊ±£¬´¥·¢ÏÝÚå¡£
+        Òì³£ÖÕÖ¹£¨Abort) ÓÃÓÚ±¨¸æÑÏÖØµÄ´íÎó¡£
+        ±à³ÌÒì³£ £¨Programmed exception)ÔÚ±à³ÌÕß·¢³öÇëÇóÊÇ·¢Éú¡£ÊÇÓÉint »ò(int3)Ö¸ÁîÊ±´¥
+ 
+1. LinuxµÄÏµÍ³µ÷ÓÃÓÐÄÄÐ©£¿´óÖÂµÄ¹¦ÄÜ·ÖÀàÓÐÄÄÐ©£¿  (w2l1)
+ÔÚLinux2.4.4°æ±¾µÄÄÚºËÖÐ£¬ÏÁÒåµÄÏµÍ³µ÷ÓÃÓÐ221¸ö£¬¿ÉÒÔÔÚ<ÄÚºËÔ´´úÂëÄ¿Â¼>ÖÐÕÒµ½Ô­±¾¡£µ«Ëæ×ÅÄÚºËµÄ¸üÐÂÏµÍ³µ÷ÓÃµÄÊýÁ¿Ò²ÔÚ²»¶Ï¸üÐÂ
+ÏµÍ³µ÷ÓÃÖ÷Òª·ÖÎªÒÔÏÂ¼¸Àà£º
+
+1.¿ØÖÆÓ²¼þ¡ª¡ªÏµÍ³µ÷ÓÃÍùÍù×÷ÎªÓ²¼þ×ÊÔ´ºÍÓÃ»§¿Õ¼äµÄ³éÏó½Ó¿Ú£¬±ÈÈç¶ÁÐ´ÎÄ¼þÊ±ÓÃµ½µÄwrite/readµ÷ÓÃ¡£
+2.ÉèÖÃÏµÍ³×´Ì¬»ò¶ÁÈ¡ÄÚºËÊý¾Ý¡ª¡ªÒòÎªÏµÍ³µ÷ÓÃÊÇÓÃ»§¿Õ¼äºÍÄÚºËµÄÎ¨Ò»Í¨Ñ¶ÊÖ¶Î£¬ËùÒÔÓÃ»§ÉèÖÃÏµÍ³×´Ì¬£¬±ÈÈç¿ª/¹ØÄ³ÏîÄÚºË·þÎñ£¨ÉèÖÃÄ³¸öÄÚºË±äÁ¿£©£¬»ò¶ÁÈ¡ÄÚºËÊý¾Ý¶¼±ØÐëÍ¨¹ýÏµÍ³µ÷ÓÃ¡£±ÈÈçgetpgid¡¢getpriority¡¢setpriority¡¢sethostname
+3.½ø³Ì¹ÜÀí¡ª¡ªÒ»ÏµÍ³µ÷ÓÃ½Ó¿ÚÊÇÓÃÀ´±£Ö¤ÏµÍ³ÖÐ½ø³ÌÄÜÒÔ¶àÈÎÎñÔÚÐéÄâÄÚ´æ»·¾³ÏÂµÃÒÔÔËÐÐ¡£±ÈÈç fork¡¢clone¡¢execve¡¢exitµÈ
+¾ßÌåÏ¸½Ú°üÀ¨:
+½ø³Ì¿ØÖÆ£¨fork ´´½¨Ò»¸öÐÂ½ø³Ì£»clone °´Ö¸¶¨Ìõ¼þ´´½¨×Ó½ø³ÌµÈ£©
+ÎÄ¼þ²Ù×÷£¨fcntl	ÎÄ¼þ¿ØÖÆ£» open	´ò¿ªÎÄ¼þ£©
+ÎÄ¼þÏµÍ³²Ù×÷£¨access	È·¶¨ÎÄ¼þµÄ¿É´æÈ¡ÐÔ£»chdir	¸Ä±äµ±Ç°¹¤×÷Ä¿Â¼£©
+ÏµÍ³¿ØÖÆ£¨ioctl	I/O×Ü¿ØÖÆº¯Êý£»_sysctl	¶Á/Ð´ÏµÍ³²ÎÊý£©
+ÄÚ´æ¹ÜÀí£¨brk	¸Ä±äÊý¾Ý¶Î¿Õ¼äµÄ·ÖÅä£»mlock	ÄÚ´æÒ³Ãæ¼ÓËø£©
+ÍøÂç¹ÜÀí(getdomainname	È¡ÓòÃû;setdomainname	ÉèÖÃÓòÃû)
+ÓÃ»§¹ÜÀí(getuid	»ñÈ¡ÓÃ»§±êÊ¶ºÅ;setuid	ÉèÖÃÓÃ»§±êÖ¾ºÅ)
+
 
 ```
-  + é‡‡åˆ†ç‚¹ï¼šè¯´æ˜Žäº†Linuxçš„å¤§è‡´æ•°é‡ï¼ˆä¸Šç™¾ä¸ªï¼‰ï¼Œè¯´æ˜Žäº†Linuxç³»ç»Ÿè°ƒç”¨çš„ä¸»è¦åˆ†ç±»ï¼ˆæ–‡ä»¶æ“ä½œï¼Œè¿›ç¨‹ç®¡ç†ï¼Œå†…å­˜ç®¡ç†ç­‰ï¼‰
-  - ç­”æ¡ˆæ²¡æœ‰æ¶‰åŠä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ï¼›ï¼ˆ0åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ä¸­çš„æŸä¸€ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ1åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ2åˆ†ï¼‰
-  - ç­”æ¡ˆé™¤äº†å¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹éƒ½è¿›è¡Œäº†æ­£ç¡®é˜è¿°å¤–ï¼Œè¿˜è¿›è¡Œäº†æ‰©å±•å’Œæ›´ä¸°å¯Œçš„è¯´æ˜Žï¼ˆ3åˆ†ï¼‰
+  + ²É·Öµã£ºËµÃ÷ÁËLinuxµÄ´óÖÂÊýÁ¿£¨ÉÏ°Ù¸ö£©£¬ËµÃ÷ÁËLinuxÏµÍ³µ÷ÓÃµÄÖ÷Òª·ÖÀà£¨ÎÄ¼þ²Ù×÷£¬½ø³Ì¹ÜÀí£¬ÄÚ´æ¹ÜÀíµÈ£©
+  - ´ð°¸Ã»ÓÐÉæ¼°ÉÏÊöÁ½¸öÒªµã£»£¨0·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµãÖÐµÄÄ³Ò»¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨1·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨2·Ö£©
+  - ´ð°¸³ýÁË¶ÔÉÏÊöÁ½¸öÒªµã¶¼½øÐÐÁËÕýÈ·²ûÊöÍâ£¬»¹½øÐÐÁËÀ©Õ¹ºÍ¸ü·á¸»µÄËµÃ÷£¨3·Ö£©
  ```
  
- 1. ä»¥ucore lab8çš„answerä¸ºä¾‹ï¼ŒuCoreçš„ç³»ç»Ÿè°ƒç”¨æœ‰å“ªäº›ï¼Ÿå¤§è‡´çš„åŠŸèƒ½åˆ†ç±»æœ‰å“ªäº›ï¼Ÿ(w2l1)
+ 1. ÒÔucore lab8µÄanswerÎªÀý£¬uCoreµÄÏµÍ³µ÷ÓÃÓÐÄÄÐ©£¿´óÖÂµÄ¹¦ÄÜ·ÖÀàÓÐÄÄÐ©£¿(w2l1)
+ ¹²ÓÐ22¸öÏµÍ³µ÷ÓÃ°üÀ¨£¨sys_exit;sys_fork;sys_wait;sys_exec;sys_yield[½ø³ÌÖ÷¶¯ÈÃ³ö´¦ÀíÆ÷];sys_kill;sys_getpid[µÃµ½½ø³Ì±àºÅ];
+sys_putc;sys_pgdir;sys_gettime;sys_lab6_set_priority;sys_sleep;sys_open;sys_close;sys_read;
+sys_write;sys_seek;sys_fstat;sys_fsync;sys_getcwd;sys_getdirentry;
+sys_dup[¡°¸´ÖÆ¡±Ò»¸ö´ò¿ªµÄÎÄ¼þºÅ£¬Ê¹Á½¸öÎÄ¼þºÅ¶¼Ö¸ÏòÍ¬Ò»¸öÎÄ¼þ];)
+´óÖÂµÄ¹¦ÄÜ·ÖÀàÓÐ£¬ÎÄ¼þ²Ù×÷(sys_open;sys_close;sys_read;µÈ),ÎÄ¼þÏµÍ³²Ù×÷(sys_getdirentryµÈ),½ø³Ì¹ÜÀí£¨sys_fork;sys_kill;µÈ£©
+ 
+ 
  
  ```
-  + é‡‡åˆ†ç‚¹ï¼šè¯´æ˜Žäº†ucoreçš„å¤§è‡´æ•°é‡ï¼ˆäºŒåå‡ ä¸ªï¼‰ï¼Œè¯´æ˜Žäº†ucoreç³»ç»Ÿè°ƒç”¨çš„ä¸»è¦åˆ†ç±»ï¼ˆæ–‡ä»¶æ“ä½œï¼Œè¿›ç¨‹ç®¡ç†ï¼Œå†…å­˜ç®¡ç†ç­‰ï¼‰
-  - ç­”æ¡ˆæ²¡æœ‰æ¶‰åŠä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ï¼›ï¼ˆ0åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ä¸­çš„æŸä¸€ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ1åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ2åˆ†ï¼‰
-  - ç­”æ¡ˆé™¤äº†å¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹éƒ½è¿›è¡Œäº†æ­£ç¡®é˜è¿°å¤–ï¼Œè¿˜è¿›è¡Œäº†æ‰©å±•å’Œæ›´ä¸°å¯Œçš„è¯´æ˜Žï¼ˆ3åˆ†ï¼‰
+  + ²É·Öµã£ºËµÃ÷ÁËucoreµÄ´óÖÂÊýÁ¿£¨¶þÊ®¼¸¸ö£©£¬ËµÃ÷ÁËucoreÏµÍ³µ÷ÓÃµÄÖ÷Òª·ÖÀà£¨ÎÄ¼þ²Ù×÷£¬½ø³Ì¹ÜÀí£¬ÄÚ´æ¹ÜÀíµÈ£©
+  - ´ð°¸Ã»ÓÐÉæ¼°ÉÏÊöÁ½¸öÒªµã£»£¨0·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµãÖÐµÄÄ³Ò»¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨1·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨2·Ö£©
+  - ´ð°¸³ýÁË¶ÔÉÏÊöÁ½¸öÒªµã¶¼½øÐÐÁËÕýÈ·²ûÊöÍâ£¬»¹½øÐÐÁËÀ©Õ¹ºÍ¸ü·á¸»µÄËµÃ÷£¨3·Ö£©
  ```
  
-## 3.4 linuxç³»ç»Ÿè°ƒç”¨åˆ†æž
- 1. é€šè¿‡åˆ†æž[lab1_ex0](https://github.com/chyyuu/ucore_lab/blob/master/related_info/lab1/lab1-ex0.md)äº†è§£Linuxåº”ç”¨çš„ç³»ç»Ÿè°ƒç”¨ç¼–å†™å’Œå«ä¹‰ã€‚(w2l1)
+## 3.4 linuxÏµÍ³µ÷ÓÃ·ÖÎö
+ 1. Í¨¹ý·ÖÎö[lab1_ex0](https://github.com/chyyuu/ucore_lab/blob/master/related_info/lab1/lab1-ex0.md)
+ ÁË½âLinuxÓ¦ÓÃµÄÏµÍ³µ÷ÓÃ±àÐ´ºÍº¬Òå¡£(w2l1)
  
 
  ```
-  + é‡‡åˆ†ç‚¹ï¼šè¯´æ˜Žäº†objdumpï¼Œnmï¼Œfileçš„å¤§è‡´ç”¨é€”ï¼Œè¯´æ˜Žäº†ç³»ç»Ÿè°ƒç”¨çš„å…·ä½“å«ä¹‰
-  - ç­”æ¡ˆæ²¡æœ‰æ¶‰åŠä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ï¼›ï¼ˆ0åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ä¸­çš„æŸä¸€ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ1åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ2åˆ†ï¼‰
-  - ç­”æ¡ˆé™¤äº†å¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹éƒ½è¿›è¡Œäº†æ­£ç¡®é˜è¿°å¤–ï¼Œè¿˜è¿›è¡Œäº†æ‰©å±•å’Œæ›´ä¸°å¯Œçš„è¯´æ˜Žï¼ˆ3åˆ†ï¼‰
+  + ²É·Öµã£ºËµÃ÷ÁËobjdump£¬nm£¬fileµÄ´óÖÂÓÃÍ¾£¬ËµÃ÷ÁËÏµÍ³µ÷ÓÃµÄ¾ßÌåº¬Òå
+  - ´ð°¸Ã»ÓÐÉæ¼°ÉÏÊöÁ½¸öÒªµã£»£¨0·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµãÖÐµÄÄ³Ò»¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨1·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨2·Ö£©
+  - ´ð°¸³ýÁË¶ÔÉÏÊöÁ½¸öÒªµã¶¼½øÐÐÁËÕýÈ·²ûÊöÍâ£¬»¹½øÐÐÁËÀ©Õ¹ºÍ¸ü·á¸»µÄËµÃ÷£¨3·Ö£©
  
  ```
  
- 1. é€šè¿‡è°ƒè¯•[lab1_ex1](https://github.com/chyyuu/ucore_lab/blob/master/related_info/lab1/lab1-ex1.md)äº†è§£Linuxåº”ç”¨çš„ç³»ç»Ÿè°ƒç”¨æ‰§è¡Œè¿‡ç¨‹ã€‚(w2l1)
- 
+ 1. Í¨¹ýµ÷ÊÔ[lab1_ex1](https://github.com/chyyuu/ucore_lab/blob/master/related_info/lab1/lab1-ex1.md)
+ ÁË½âLinuxÓ¦ÓÃµÄÏµÍ³µ÷ÓÃÖ´ÐÐ¹ý³Ì¡£(w2l1)
+ strace ÃüÁîÊÇÒ»ÖÖÇ¿´óµÄ¹¤¾ß£¬ËüÄÜ¹»ÏÔÊ¾ËùÓÐÓÉÓÃ»§¿Õ¼ä³ÌÐò·¢³öµÄÏµÍ³µ÷ÓÃ¡£
+ ×îÖÕÊä³ö½á¹ûÈçÏÂ£º
+ µÃµ½²»Í¬ÏµÍ³µ÷ÓÃµÄÊ±¼ä£º
+ % time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 30.54    0.000102          26         4           mprotect   [ ÉèÖÃÄÚ´æÓ³Ïñ±£»¤ ]
+ 23.05    0.000077          10         8           mmap       [ ½«Ò»¸öÎÄ¼þ»òÕßÆäËü¶ÔÏóÓ³Éä½øÄÚ´æ ]
+ 14.37    0.000048          48         1           write     
+  8.98    0.000030          15         2           open      
+  8.68    0.000029          29         1           munmap     [ ½â³ýÄÚ´æÓ³Éä ]
+  8.38    0.000028           9         3         3 access     [ ¼ì²éµ÷ÓÃ½ø³ÌÊÇ·ñ¿ÉÒÔ¶ÔÖ¸¶¨µÄÎÄ¼þÖ´ÐÐÄ³ÖÖ²Ù×÷ ]
+  2.10    0.000007           2         3           fstat      [ ÓÉÎÄ¼þÃèÊö´ÊÈ¡µÃÎÄ¼þ×´Ì¬ ]
+  1.20    0.000004           4         1           read
+  0.90    0.000003           2         2           close
+  0.90    0.000003           3         1           execve
+  0.60    0.000002           2         1           brk        [ ÊµÏÖÐéÄâÄÚ´æµ½ÄÚ´æµÄÓ³Éä ]
+  0.30    0.000001           1         1           arch_prctl [ ÉèÖÃ¼Ü¹¹ÌØ¶¨µÄÏß³Ì×´Ì¬ ]
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000334                    28         3 total
+¾ßÌåÏµÍ³µ÷ÓÃÖ´ÐÐÁ÷³ÌÎª£º
+execve("./lab1-ex1.exe", ["./lab1-ex1.exe"], [/* 73 vars */]) = 0
+brk(0)                                  = 0x11bc000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff6185c5000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=93381, ...}) = 0
+mmap(NULL, 93381, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7ff6185ae000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320\37\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1845024, ...}) = 0
+mmap(NULL, 3953344, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7ff617fdf000
+mprotect(0x7ff61819a000, 2097152, PROT_NONE) = 0
+mmap(0x7ff61839a000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bb000) = 0x7ff61839a000
+mmap(0x7ff6183a0000, 17088, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff6183a0000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff6185ad000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff6185ab000
+arch_prctl(ARCH_SET_FS, 0x7ff6185ab740) = 0
+mprotect(0x7ff61839a000, 16384, PROT_READ) = 0
+mprotect(0x600000, 4096, PROT_READ)     = 0
+mprotect(0x7ff6185c7000, 4096, PROT_READ) = 0
+munmap(0x7ff6185ae000, 93381)           = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff6185c4000
+write(1, "hello world\n", 12hello world)           = 12
+exit_group(12)                          = ?
+
+¾ßÌåÖ´ÐÐ¹ý³Ì£º
+Ê×ÏÈ½øÐÐÐéÄâÄÚ´æµ½ÄÚ´æµÄÓ³Éä£¬È»ºóÅÐ¶Ïld.so.nohwcapÓëld.so.preloadÁ½¸öÎÄ¼þÊÇ·ñ¿ÉÒÔÊ¹ÓÃ¡£ÅÐ¶ÏÖ®ºó½«ÎÄ¼þ
+Ó³Éäµ½ÄÚ´æ£¬²¢ÉèÖÃÄÚ´æÓ³Ïñ±£»¤¡£È»ºóÉèÖÃ¼Ü¹¹ÌØ¶¨µÄÏß³Ì×´Ì¬¡£×îÖÕµ÷ÓÃwriteµÄº¯Êý£¬ÏòÆÁÄ»Êä³öÖÆ¶¨µÄ×Ö·û´®¡£
 
  ```
-  + é‡‡åˆ†ç‚¹ï¼šè¯´æ˜Žäº†straceçš„å¤§è‡´ç”¨é€”ï¼Œè¯´æ˜Žäº†ç³»ç»Ÿè°ƒç”¨çš„å…·ä½“æ‰§è¡Œè¿‡ç¨‹ï¼ˆåŒ…æ‹¬åº”ç”¨ï¼ŒCPUç¡¬ä»¶ï¼Œæ“ä½œç³»ç»Ÿçš„æ‰§è¡Œè¿‡ç¨‹ï¼‰
-  - ç­”æ¡ˆæ²¡æœ‰æ¶‰åŠä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ï¼›ï¼ˆ0åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹ä¸­çš„æŸä¸€ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ1åˆ†ï¼‰
-  - ç­”æ¡ˆå¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹è¿›è¡Œäº†æ­£ç¡®é˜è¿°ï¼ˆ2åˆ†ï¼‰
-  - ç­”æ¡ˆé™¤äº†å¯¹ä¸Šè¿°ä¸¤ä¸ªè¦ç‚¹éƒ½è¿›è¡Œäº†æ­£ç¡®é˜è¿°å¤–ï¼Œè¿˜è¿›è¡Œäº†æ‰©å±•å’Œæ›´ä¸°å¯Œçš„è¯´æ˜Žï¼ˆ3åˆ†ï¼‰
+  + ²É·Öµã£ºËµÃ÷ÁËstraceµÄ´óÖÂÓÃÍ¾£¬ËµÃ÷ÁËÏµÍ³µ÷ÓÃµÄ¾ßÌåÖ´ÐÐ¹ý³Ì£¨°üÀ¨Ó¦ÓÃ£¬CPUÓ²¼þ£¬²Ù×÷ÏµÍ³µÄÖ´ÐÐ¹ý³Ì£©
+  - ´ð°¸Ã»ÓÐÉæ¼°ÉÏÊöÁ½¸öÒªµã£»£¨0·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµãÖÐµÄÄ³Ò»¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨1·Ö£©
+  - ´ð°¸¶ÔÉÏÊöÁ½¸öÒªµã½øÐÐÁËÕýÈ·²ûÊö£¨2·Ö£©
+  - ´ð°¸³ýÁË¶ÔÉÏÊöÁ½¸öÒªµã¶¼½øÐÐÁËÕýÈ·²ûÊöÍâ£¬»¹½øÐÐÁËÀ©Õ¹ºÍ¸ü·á¸»µÄËµÃ÷£¨3·Ö£©
  ```
  
-## 3.5 ucoreç³»ç»Ÿè°ƒç”¨åˆ†æž
- 1. ucoreçš„ç³»ç»Ÿè°ƒç”¨ä¸­å‚æ•°ä¼ é€’ä»£ç åˆ†æžã€‚
- 1. ucoreçš„ç³»ç»Ÿè°ƒç”¨ä¸­è¿”å›žç»“æžœçš„ä¼ é€’ä»£ç åˆ†æžã€‚
- 1. ä»¥ucore lab8çš„answerä¸ºä¾‹ï¼Œåˆ†æžucore åº”ç”¨çš„ç³»ç»Ÿè°ƒç”¨ç¼–å†™å’Œå«ä¹‰ã€‚
- 1. ä»¥ucore lab8çš„answerä¸ºä¾‹ï¼Œå°è¯•ä¿®æ”¹å¹¶è¿è¡Œucore OS kernelä»£ç ï¼Œä½¿å…¶å…·æœ‰ç±»ä¼¼Linuxåº”ç”¨å·¥å…·`strace`çš„åŠŸèƒ½ï¼Œå³èƒ½å¤Ÿæ˜¾ç¤ºå‡ºåº”ç”¨ç¨‹åºå‘å‡ºçš„ç³»ç»Ÿè°ƒç”¨ï¼Œä»Žè€Œå¯ä»¥åˆ†æžucoreåº”ç”¨çš„ç³»ç»Ÿè°ƒç”¨æ‰§è¡Œè¿‡ç¨‹ã€‚
+## 3.5 ucoreÏµÍ³µ÷ÓÃ·ÖÎö
+ 1. ucoreµÄÏµÍ³µ÷ÓÃÖÐ²ÎÊý´«µÝ´úÂë·ÖÎö¡£
+ 1. ucoreµÄÏµÍ³µ÷ÓÃÖÐ·µ»Ø½á¹ûµÄ´«µÝ´úÂë·ÖÎö¡£
+ 1. ÒÔucore lab8µÄanswerÎªÀý£¬·ÖÎöucore Ó¦ÓÃµÄÏµÍ³µ÷ÓÃ±àÐ´ºÍº¬Òå¡£
+ 1. ÒÔucore lab8µÄanswerÎªÀý£¬³¢ÊÔÐÞ¸Ä²¢ÔËÐÐ´úÂë£¬·ÖÎöucoreÓ¦ÓÃµÄÏµÍ³µ÷ÓÃÖ´ÐÐ¹ý³Ì¡£
  
-## 3.6 è¯·åˆ†æžå‡½æ•°è°ƒç”¨å’Œç³»ç»Ÿè°ƒç”¨çš„åŒºåˆ«
- 1. è¯·ä»Žä»£ç ç¼–å†™å’Œæ‰§è¡Œè¿‡ç¨‹æ¥è¯´æ˜Žã€‚
-   1. è¯´æ˜Ž`int`ã€`iret`ã€`call`å’Œ`ret`çš„æŒ‡ä»¤å‡†ç¡®åŠŸèƒ½
+## 3.6 Çë·ÖÎöº¯Êýµ÷ÓÃºÍÏµÍ³µ÷ÓÃµÄÇø±ð
+ 1. Çë´Ó´úÂë±àÐ´ºÍÖ´ÐÐ¹ý³ÌÀ´ËµÃ÷¡£
+   1. ËµÃ÷`int`¡¢`iret`¡¢`call`ºÍ`ret`µÄÖ¸Áî×¼È·¹¦ÄÜ
  
