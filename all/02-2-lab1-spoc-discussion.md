@@ -63,8 +63,8 @@ lab1中printfmt函数用到了可变参，请参考写一个小的linux应用程
 - [x]  
 
 > 
-#include <stdarg.h>   
-#include <stdio.h>      
+\#include <stdarg.h>   
+\#include <stdio.h>      
 void foo(int n,...)   
 {   
 	va_list ap;   
