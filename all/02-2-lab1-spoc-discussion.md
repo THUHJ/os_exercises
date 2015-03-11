@@ -39,6 +39,7 @@ lab1中完成了对哪些外设的访问？ (w2l2)
 >  lab1中完成了对时钟的访问，除了时钟之外还访问了串口、并口、CGA（用以显示）和键盘（用以用户输入）。
 
 
+
 lab1中的cprintf函数最终通过哪些外设完成了对字符串的输出？ (w2l2)
  ```
   + 采分点：说明了cprintf函数用到的3个外设
@@ -49,7 +50,7 @@ lab1中的cprintf函数最终通过哪些外设完成了对字符串的输出？
  ```
 - [x]  
 
->  使用了并口、串口和CGA，也就是我们说的Monitor显示器，将需要输出的信息在屏幕中显示出来。
+>  使用了并口、串口和CGA，也就是我们说的Monitor显示器，将需要输出的信息在屏幕中显示出来。    
 
 
 ---
@@ -62,29 +63,29 @@ lab1中printfmt函数用到了可变参，请参考写一个小的linux应用程
 - [x]  
 
 > 
-#include <stdarg.h>
-#include <stdio.h>
-void foo(int n,...)
-{
-	va_list ap;
-	va_start(ap,n);
-	while (n>0)
-	{
-		int x=va_arg(ap,int);
-		printf("%d\n",x);
-		n--;
-	}
-}
-int main()
-{
-	foo(1,1);
-	foo(2,2,3);
-}
-输出结果为：
-1
-2
-3
-能够处理函数多个参数的情况。
+#include <stdarg.h>   
+#include <stdio.h>      
+void foo(int n,...)   
+{   
+	va_list ap;   
+	va_start(ap,n);   
+	while (n>0)   
+	{   
+		int x=va_arg(ap,int);   
+		printf("%d\n",x);   
+		n--;   
+	}   
+}   
+int main()   
+{   
+	foo(1,1);   
+	foo(2,2,3);   
+}   
+输出结果为：   
+1   
+2   
+3   
+能够处理函数多个参数的情况。   
 
 如果让你来一个阶段一个阶段地从零开始完整实现lab1（不是现在的填空考方式），你的实现步骤是什么？
 （比如先实现一个可显示字符串的bootloader（描述一下要实现的关键步骤和需要注意的事项），
@@ -115,6 +116,8 @@ ELF格式是Linux系统下的一种常用目标文件(object file)格式，能�
 
 对于ucore_lab中的labcodes/lab1，我们知道如果在qemu中执行，可能会出现各种稀奇古怪的问题，
 比如reboot，死机，黑屏等等。
+
+
 请通过qemu的分析功能来动态分析并回答lab1是如何执行并最终为什么会出现这种情况？
 - [x]  
 
