@@ -62,7 +62,7 @@ http://coolshell.cn/tag/buddy
 ```
 
 实现代码：
-“”“
+```
 #include<stdio.h>
 #include<malloc.h>
 #include <iostream>
@@ -205,7 +205,7 @@ int main()
 	my_free(m5);
 	display();
 }
-"""
+'''
 设计思路：
     我的学号为2012011272，实现最优匹配算法。
     用一个链表freelist来保存空闲分区，主要实现my_free,my_malloc,init,display,my_merge这五个函数。
@@ -214,7 +214,7 @@ int main()
 	my_malloc进行内存分配，采用最优匹配，每次选择最小的可以容纳的空闲分区。函数返回可以使用的内存开始地址。
 	my_free进行内存释放，将空闲块加入freelist中，然后调用my_merge这个函数对freelist中的可以合并的分区进行合并。
 测试用例：
-“”“
+'''
 	init();
 	display();
 	char * m1 = my_malloc(100);
@@ -231,9 +231,9 @@ int main()
 	my_free(m4);
 	my_free(m5);
 	display();
-”“”
+'''
 测试结果：
-“”“
+'''
 	display begin--------------------
 	freeblock1  address: 4223008 size:1000
 	display end--------------------
@@ -279,9 +279,9 @@ int main()
 	display begin--------------------
 	freeblock1  address: 4223008 size:1000
 	display end--------------------
-”“” 
+'''
 用例说明：
-“”“
+'''
 	开始时要求分配大小为100,400,600,100的空间，其中600由于太大分配失败，其他可以成功分配。
 	分配后剩余一个freeblock1  address: 4223620 size:388
 	然后依次释放400、100（第一块）的，能够成功释放并且正确合并，这个时候得到：
@@ -292,7 +292,7 @@ int main()
 	freeblock1  address: 4223008 size:508
 	freeblock2  address: 4223924 size:84
 	最后释放剩余两块恢复开始情况。说明要求分配大小为n的情况，实际会使用给它n+4字节大小，因为需要来存储使用的长度。
-”“”
+'''
 --- 
 
 ## 扩展思考题
