@@ -139,12 +139,9 @@ def work(va,pa):
     print 'pde_ctx:',hex(pde_ctx),
     print 'pte_idx:',hex(pte_idx),
     print 'pte_ctx:',hex(pte_ctx)
-
-    
 f=file('data.txt','r')
 line = f.readline()
 while line:
-   
     t=line.strip().split(' ')
     work(int(t[1],16),int(t[3],16))
     line = f.readline()
