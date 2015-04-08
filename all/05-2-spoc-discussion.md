@@ -267,7 +267,12 @@ class scheduler:
             if self.proc_info[pid][PROC_STATE] != STATE_DONE:
                 num_active += 1
         return num_active
-
+    def get_num_running(self):
+        num_active = 0
+        for pid in range(len(self.proc_info)):
+            if  self.proc_info[pid][PROC_STATE] == STATE_RUNNING:
+                num_active += 1
+        return num_active
     def get_num_runnable(self):
         num_active = 0
         for pid in range(len(self.proc_info)):
@@ -334,9 +339,15 @@ class scheduler:
        	            #YOUR CODE
                     #print 'pid',pid
 		    self.move_to_ready(STATE_WAIT,pid)
-		    self.next_proc()
+		    #print 'num: ',self.get_num_runnable()
+		    if self.get_num_running()==0:
+                        self.next_proc()
                     #pass #YOU should delete this
+            #print self.proc_info[0][PROC_STATE]
+            #print self.proc_info[1][PROC_STATE]
             
+                
+                
             # if current proc is RUNNING and has an instruction, execute it
             instruction_to_execute = ''
             if self.proc_info[self.curr_proc][PROC_STATE] == STATE_RUNNING and \
@@ -354,6 +365,7 @@ class scheduler:
             for pid in range(len(self.proc_info)):
                 if pid == self.curr_proc and instruction_to_execute != '':
                     print '%10s' % ('RUN:'+instruction_to_execute),
+                    cpu_busy=cpu_busy+1
                 else:
                     print '%10s' % (self.proc_info[pid][PROC_STATE]),
             if instruction_to_execute == '':
@@ -373,7 +385,10 @@ class scheduler:
             if instruction_to_execute == DO_YIELD:
                 #print "-------------------------"
                 #YOUR CODE
-                self.move_to_ready(STATE_RUNNING)
+                if len(self.proc_info[self.curr_proc][PROC_CODE]) > 0:
+                    self.move_to_ready(STATE_RUNNING)
+                else:
+                    self.move_to_done(STATE_RUNNING)
                 self.next_proc();
                 #pass #YOU should delete this
             # if this is an IO instruction, switch to waiting state
@@ -381,7 +396,7 @@ class scheduler:
             elif instruction_to_execute == DO_IO:
                 #YOUR CODE
                 pid = self.curr_proc
-		self.io_finish_times[pid].append(clock_tick+5)
+		self.io_finish_times[pid].append(clock_tick+io_length)
 		self.move_to_waiting(STATE_RUNNING)
 		self.next_proc();
 				
@@ -446,5 +461,6 @@ print 'Stats: Total Time %d' % clock_tick
 print 'Stats: CPU Busy %d (%.2f%%)' % (cpu_busy, 100.0 * float(cpu_busy)/clock_tick)
 print 'Stats: IO Busy  %d (%.2f%%)' % (io_busy, 100.0 * float(io_busy)/clock_tick)
 print ''
+
 
 ```
