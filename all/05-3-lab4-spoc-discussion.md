@@ -190,7 +190,6 @@ pid = 1, name = init1, status switch from runnable to zombie and resource had be
 >可以看到，在sleep20个时钟中断，在其他2,3线程结束后，1依旧在等待，此时0线程等待着1完成。当20个时钟中断后，1恢复运行，最后成功回收资源并推出。  
 >修改休眠周期为5，效果如下：
 ```
-
 pid = 1, status switch from uninit to runnable
 pid = 2, status switch from uninit to runnable
 pid = 3, status switch from uninit to runnable
@@ -214,7 +213,6 @@ pid = 1, name = init1, status switch from runnable to zombie
 pid = 1, name = init1, status switch from runnable to zombie and resource had been freed
 pid = 2, name = init2, status switch from runnable to zombie and resource had been freed
 pid = 3, name = init3, status switch from runnable to zombie and resource had been freed
-
 ```
 >可以看到，1在完成step后开始休眠，休眠5个时钟后醒来。
 ### 扩展练习1: 进一步裁剪本练习中的代码，比如去掉页表的管理，只保留段机制，中断，内核线程切换，print功能。看看代码规模会小到什么程度。
