@@ -68,7 +68,15 @@ user sh is running!!!$ hello
 10: ide_read_secs
 ...
 ```
+
+
+代码位于：
+代码：http://south.cs.tsinghua.edu.cn/08d68380e94e46d48bb6/ucore_lab/tree/master/labcodes_answer/lab8_result
+
+
+
 可以看到从syscall 到 ide_read读扇区的输出信息。
 2. （spoc） 在下面的实验代码的基础上，实现基于文件系统的pipe IPC机制
 
 ### 练习用的[lab8 spoc exercise project source code](https://github.com/chyyuu/ucore_lab/tree/master/labcodes_answer/lab8_result)
+
